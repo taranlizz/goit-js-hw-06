@@ -29,7 +29,8 @@ function createBoxes(amount) {
   let size = 30;
   let markup = `<div style = "width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()}"></div>`;
   for (let i = 1; i < amount; i += 1) {
-    markup += `<div style = "width: ${(size += 10)}px; height: ${(size += 10)}px; background-color: ${getRandomHexColor()}"></div>`;
+    size += 10;
+    markup += `<div style = "width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()}"></div>`;
   }
   return markup;
 }
