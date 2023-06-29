@@ -7,31 +7,29 @@ function getRandomHexColor() {
 const refs = {
   createBtnEl: document.querySelector("[data-create]"),
   destroyBtnEl: document.querySelector("[data-destroy]"),
-  divEl: document.getElementById("controls"),
-  divBoxesEl: document.getElementById("boxes"),
+  controlsDivEl: document.getElementById("controls"),
+  containerEl: document.getElementById("boxes"),
 };
-const inputEl = refs.divEl.firstElementChild;
+
+const inputEl = refs.controlsDivEl.firstElementChild;
 
 refs.createBtnEl.addEventListener("click", onCreateBtnClick);
+refs.destroyBtnEl.addEventListener("click", onDestroyBtnClick);
 
 function onCreateBtnClick() {
   const markup = createBoxes(inputEl.value);
-  console.log(markup);
-  refs.divBoxesEl.insertAdjacentHTML("beforeend", markup);
+  refs.containerEl.insertAdjacentHTML("beforeend", markup);
 }
 
-///ПРОДУМАТЬ ЛОГИКУ ДОБАВЛЕНИЯ КВАДРАТОВ!!!!!
-function createBoxes(amount = 0) {
-  let tmp = 30;
-  let markup = `<div style = "width: ${tmp}px; height: ${tmp}px; background-color: ${getRandomHexColor()}"></div>`;
-  for (let i = 1; i <= amount; i += 1) {
-    markup += `<div style = "width: ${tmp + 10}px; height: ${
-      tmp + 10
-    }px; background-color: ${getRandomHexColor()}"></div>`;
+function onDestroyBtnClick() {
+  refs.containerEl.innerHTML = "";
+}
+
+function createBoxes(amount) {
+  let size = 30;
+  let markup = `<div style = "width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()}"></div>`;
+  for (let i = 1; i < amount; i += 1) {
+    markup += `<div style = "width: ${(size += 10)}px; height: ${(size += 10)}px; background-color: ${getRandomHexColor()}"></div>`;
   }
   return markup;
 }
-
-createBoxes(3);
-
-////
